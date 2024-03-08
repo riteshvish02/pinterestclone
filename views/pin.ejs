@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/pin.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+      /*ROOT*/
+      * {
+        outline: none;
+        margin: 0;
+        padding: 0;
+        /* box-sizing: border-box; */
+        font-family: arial;
+
+      }
+      html,body{
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+      }
+      body::-webkit-scrollbar{
+        display: none;
+      }
+      /* body {
+        margin: 0px;
+        padding: 0px;
+      } */
+
+      img {
+        user-select: none;
+      }
+
+      /*MENU*/
+      .menu {
+        max-width: 100%;
+        display: flex;
+        height: 50px;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        padding: 0 15px;
+        z-index: 99999;
+        font-weight: bold;
+      }
+      .menu .logo {
+        width: 15px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+      .menu .logo:hover {
+        background: #eeeeee;
+      }
+      .menu .home {
+        color: #000;
+
+        cursor: pointer;
+        user-select: none;
+        font-size: 10px;
+        font-weight: 550;
+        border-radius: 40px;
+        margin: 0px 5px;
+      }
+      .menu .search-bar {
+        width: 100%;
+        margin: 0px 5px;
+        border-radius: 40px;
+        outline: none;
+        padding: 4px;
+        position: relative;
+        background-color: #efefef;
+        font-size: 10px;
+        /* background-image:url("https://cdn4.iconfinder.com/data/icons/music-ui-solid-24px/24/search-3-256.png"); */
+        background-size: 21px;
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-position: 10px;
+        color: gray;
+        border: 4px solid transparent;
+      }
+      .menu .search-bar:hover {
+        background-color: #3333;
+      }
+      .menu .search-bar:focus {
+        border: 0.1px solid #7bb5f0;
+        padding: 5px;
+        background-image: none;
+      }
+      .menu .search-bar::placeholder {
+        user-select: none;
+      }
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+      .icon-container .icon {
+        width: 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 8px;
+      }
+      .icon-container .icon:hover {
+        background-color: #eeeeee;
+      }
+      svg {
+        padding: 4px 8px !important;
+      }
+      .icon-container .btn {
+        width: 10px;
+        padding: 5px;
+      }
+      .focus-bar {
+        width: 250px;
+        height: 350px;
+        border-radius: 15px;
+        position: absolute;
+        background: #fff;
+        border: 2px solid #3333;
+        position: absolute;
+        top: 40px; /*50px*/
+        left: -150px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        user-select: none;
+        z-index: 99;
+      }
+      .bell:focus + .message + .pp + .btn + .bell-bar,
+      .bell-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .message:focus + .pp + .btn + .bell-bar + .message-bar,
+      .message-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .pp:focus + .btn + .bell-bar + .message-bar + .pp-bar,
+      .pp-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .btn:focus + .bell-bar + .message-bar + .pp-bar + .btn-bar,
+      .btn-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .pp-bar a {
+        text-decoration: none;
+        padding: 5px 15px;
+        border: 2px solid #161b22;
+        color: #161b22;
+        border-radius: 5px;
+      }
+      .pp-bar {
+        flex-direction: column;
+      }
+      .pp-bar img {
+        width: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+      .pp-bar a:hover {
+        background: #161b22;
+        color: white;
+      }
+
+      /*MINI SEARCH BAR*/
+      #two {
+        display: none;
+        padding: 15px;
+      }
+      .anchor:hover {
+        background-color: transparent !important;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="menu">
+      <img
+        draggable="false"
+        class="logo"
+        src="https://cdn1.iconfinder.com/data/icons/logotypes/32/pinterest-512.png" />
+      <a class="home">Home</a>
+      <a class="home">Explore</a>
+      <a class="home">Create</a>
+      <input id="one" type="text" class="search-bar" placeholder="Search" />
+      <!-- <button id="two" class="search-bar"></button> -->
+      <div class="icon-container">
+        <svg
+          tabindex="1"
+          draggable="false"
+          style="fill: #333"
+          class="gUZ ztu U9O kVc icon bell"
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          aria-label=""
+          role="img">
+          <path
+            d="M12 24c-1.66 0-3-1.34-3-3h6c0 1.66-1.34 3-3 3zm7-10.83c1.58 1.52 2.67 3.55 3 5.83H2c.33-2.28 1.42-4.31 3-5.83V7c0-3.87 3.13-7 7-7s7 3.13 7 7v6.17z"></path>
+        </svg>
+        <svg
+          tabindex="1"
+          draggable="false"
+          class="Hn_ gUZ ztu U9O kVc icon message"
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          aria-label=""
+          role="img">
+          <path
+            d="M18 12.5a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18 12.5m-6 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 12 12.5m-6 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 6 12.5M12 0C5.925 0 1 4.925 1 11c0 2.653.94 5.086 2.504 6.986L2 24l5.336-3.049A10.93 10.93 0 0 0 12 22c6.075 0 11-4.925 11-11S18.075 0 12 0"></path>
+        </svg>
+        <a
+          href="/profile"
+          tabindex="1"
+          draggable="false"
+          class="icon pp anchor">
+          <img 
+            id="img"
+            style="width: 20px; height: 20px; object-fit: cover; object-position: center; border-radius: 50%"
+            src="/images/uploads/<%=user.image%>" />
+        </a>
+        <img
+          tabindex="1"
+          draggable="false"
+          class="icon btn"
+          src="https://i.hizliresim.com/g15mqud.png" />
+
+        <!----FOCUS----->
+        <div tabindex="1" class="focus-bar bell-bar">nothing</div>
+        <!-------------------->
+        <div tabindex="1" class="focus-bar message-bar">you are alone</div>
+        <div tabindex="1" class="focus-bar btn-bar">hello</div>
+      </div>
+    </div>
+   <div id="main">
+      <div id="perpost">
+        <div id="imagesec">
+          <div id="src">
+            <div id="overlay">
+              <button><i class="ri-arrow-right-up-line"></i><h3>view image</h3></button>
+            </div>
+            <img src="/images/uploads/<%=post.image%>" alt="">
+          </div>
+        </div>
+        <div id="content">
+            <div id="navpart">  
+                <div id="navright">
+                  <svg class="gUZ R19 U9O kVc" height="20" width="20" viewBox="0 0 24 24" aria-hidden="true" aria-label="" role="img"><path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3M3 9c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm18 0c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"></path></svg>
+                  <svg class="gUZ PLa U9O kVc" height="20" width="20" viewBox="0 0 24 24" aria-hidden="true" aria-label="" role="img"><path d="M21 14c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2v-6c0-1.1.9-2 2-2s2 .9 2 2v4h14v-4c0-1.1.9-2 2-2zM8.82 8.84c-.78.78-2.05.79-2.83 0-.78-.78-.79-2.04-.01-2.82L11.99 0l6.02 6.01c.78.78.79 2.05.01 2.83-.78.78-2.05.79-2.83 0l-1.2-1.19v6.18a2 2 0 1 1-4 0V7.66L8.82 8.84z"></path></svg>
+                  <div class="x8f INd _O1 KS5 mQ8 OGJ YbY" style="height: 48px; width: 48px;"><svg class="gUZ R19 U9O kVc" height="20" width="20" viewBox="0 0 24 24" aria-hidden="true" aria-label="" role="img"><path d="M10.52 3.11a2 2 0 013.59 0l2.06 4.17c.02.06.08.1.15.11l4.6.67a2 2 0 011.1 3.41l-3.32 3.25a.2.2 0 00-.06.17l.78 4.58a2 2 0 01-2.9 2.11l-4.11-2.16a.2.2 0 00-.19 0l-4.11 2.16a2 2 0 01-2.9-2.1l.78-4.59a.2.2 0 00-.06-.17l-3.32-3.25a2 2 0 011.1-3.41l4.6-.67a.2.2 0 00.15-.1zm3.9 5.15l-1.75-3.53a.4.4 0 00-.71 0L10.2 8.26a2 2 0 01-1.5 1.1l-3.9.56a.4.4 0 00-.23.69l2.83 2.75a2 2 0 01.57 1.77L7.31 19a.4.4 0 00.58.42l3.5-1.83a2 2 0 011.86 0l3.48 1.83a.4.4 0 00.59-.42l-.67-3.88a2 2 0 01.57-1.77l2.83-2.75a.4.4 0 00-.22-.69l-3.9-.56a2 2 0 01-1.51-1.1z"></path></svg></div>
+                </div>
+                <button>save</button>
+            </div>
+            <div id="title">
+                <h3><%=post.title%></h3>
+                <h4><%=post.description%></h4>
+            </div>
+            <div id="profileimg">
+                <img src="/images/uploads/<%=user.image%>" alt="">    
+                <h3><%=user.fullname%></h3>
+            </div>
+            <div id="comment">
+                <h3>comments</h3>
+            </div>
+            <form id="pinforem" action="">
+                <h3>what do you think?</h3>
+              <div id="com">
+                <div id="img2">
+                  <img src="/images/uploads/<%=user.image%>" alt="">
+                </div>
+                <input type="text" placeholder="Add a comment">
+                <div id="emoji">😊</div>
+              </div>
+            </form>
+        </div>
+      </div>
+      <div id="sections">
+        
+      </div>
+   </div>
+
+    <script>
+       function forem(){
+      document.querySelector("#pen").addEventListener("click",function(){
+          document.querySelector("#inputtext").click();
+      })
+      document.querySelector("#inputtext").addEventListener("change",function(){
+        document.querySelector("#forem").submit();
+      })
+     }
+     forem();
+      document.getElementById("two").onclick = function () {
+        document.getElementById("two").style.pointerEvents = "none";
+        document.getElementById("two").style.opacity = "0.5";
+        document.querySelector(".responsive-search-bar").style.top = "0px";
+      };
+      document.querySelector(".close").onclick = function () {
+        document.getElementById("two").style.pointerEvents = "auto";
+        document.getElementById("two").style.opacity = "1";
+        document.querySelector(".responsive-search-bar").style.top = "-300px";
+      };
+    
+    </script>
+  </body>
+</html>

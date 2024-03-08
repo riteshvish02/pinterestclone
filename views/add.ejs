@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./stylesheets/profile.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+      /*ROOT*/
+      * {
+        outline: none;
+        margin: 0;
+        padding: 0;
+        /* box-sizing: border-box; */
+        font-family: arial;
+
+      }
+      html,body{
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+      }
+      body::-webkit-scrollbar{
+        display: none;
+      }
+      /* body {
+        margin: 0px;
+        padding: 0px;
+      } */
+
+      img {
+        user-select: none;
+      }
+
+      /*MENU*/
+      .menu {
+        max-width: 100%;
+        display: flex;
+        height: 50px;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        padding: 0 15px;
+        z-index: 99999;
+        font-weight: bold;
+      }
+      .menu .logo {
+        width: 15px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+      .menu .logo:hover {
+        background: #eeeeee;
+      }
+      .menu .home {
+        color: #000;
+
+        cursor: pointer;
+        user-select: none;
+        font-size: 10px;
+        font-weight: 550;
+        border-radius: 40px;
+        margin: 0px 5px;
+      }
+      .menu .search-bar {
+        width: 100%;
+        margin: 0px 5px;
+        border-radius: 40px;
+        outline: none;
+        padding: 4px;
+        position: relative;
+        background-color: #efefef;
+        font-size: 10px;
+        /* background-image:url("https://cdn4.iconfinder.com/data/icons/music-ui-solid-24px/24/search-3-256.png"); */
+        background-size: 21px;
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-position: 10px;
+        color: gray;
+        border: 4px solid transparent;
+      }
+      .menu .search-bar:hover {
+        background-color: #3333;
+      }
+      .menu .search-bar:focus {
+        border: 0.1px solid #7bb5f0;
+        padding: 5px;
+        background-image: none;
+      }
+      .menu .search-bar::placeholder {
+        user-select: none;
+      }
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+      .icon-container .icon {
+        width: 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 8px;
+      }
+      .icon-container .icon:hover {
+        background-color: #eeeeee;
+      }
+      svg {
+        padding: 4px 8px !important;
+      }
+      .icon-container .btn {
+        width: 10px;
+        padding: 5px;
+      }
+      .focus-bar {
+        width: 250px;
+        height: 350px;
+        border-radius: 15px;
+        position: absolute;
+        background: #fff;
+        border: 2px solid #3333;
+        position: absolute;
+        top: 40px; /*50px*/
+        left: -150px;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        user-select: none;
+        z-index: 99;
+      }
+      .bell:focus + .message + .pp + .btn + .bell-bar,
+      .bell-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .message:focus + .pp + .btn + .bell-bar + .message-bar,
+      .message-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .pp:focus + .btn + .bell-bar + .message-bar + .pp-bar,
+      .pp-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .btn:focus + .bell-bar + .message-bar + .pp-bar + .btn-bar,
+      .btn-bar:focus {
+        visibility: visible;
+        opacity: 1;
+        top: 50px;
+      }
+      .pp-bar a {
+        text-decoration: none;
+        padding: 5px 15px;
+        border: 2px solid #161b22;
+        color: #161b22;
+        border-radius: 5px;
+      }
+      .pp-bar {
+        flex-direction: column;
+      }
+      .pp-bar img {
+        width: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+      .pp-bar a:hover {
+        background: #161b22;
+        color: white;
+      }
+
+      /*MINI SEARCH BAR*/
+      #two {
+        display: none;
+        padding: 15px;
+      }
+      .anchor:hover {
+        background-color: transparent !important;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="menu">
+      <img
+        draggable="false"
+        class="logo"
+        src="https://cdn1.iconfinder.com/data/icons/logotypes/32/pinterest-512.png" />
+      <a class="home">Home</a>
+      <a class="home">Explore</a>
+      <a class="home">Create</a>
+      <input id="one" type="text" class="search-bar" placeholder="Search" />
+      <!-- <button id="two" class="search-bar"></button> -->
+      <div class="icon-container">
+        <svg
+          tabindex="1"
+          draggable="false"
+          style="fill: #333"
+          class="gUZ ztu U9O kVc icon bell"
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          aria-label=""
+          role="img">
+          <path
+            d="M12 24c-1.66 0-3-1.34-3-3h6c0 1.66-1.34 3-3 3zm7-10.83c1.58 1.52 2.67 3.55 3 5.83H2c.33-2.28 1.42-4.31 3-5.83V7c0-3.87 3.13-7 7-7s7 3.13 7 7v6.17z"></path>
+        </svg>
+        <svg
+          tabindex="1"
+          draggable="false"
+          class="Hn_ gUZ ztu U9O kVc icon message"
+          height="24"
+          width="24"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          aria-label=""
+          role="img">
+          <path
+            d="M18 12.5a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18 12.5m-6 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 12 12.5m-6 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 6 12.5M12 0C5.925 0 1 4.925 1 11c0 2.653.94 5.086 2.504 6.986L2 24l5.336-3.049A10.93 10.93 0 0 0 12 22c6.075 0 11-4.925 11-11S18.075 0 12 0"></path>
+        </svg>
+        <a
+          href="/profile"
+          tabindex="1"
+          draggable="false"
+          class="icon pp anchor">
+          <img 
+            id="img"
+            style="width: 20px; height: 20px; object-fit: cover; object-position: center; border-radius: 50%"
+            src="/images/uploads/<%=user.image%>" />
+        </a>
+        <img
+          tabindex="1"
+          draggable="false"
+          class="icon btn"
+          src="https://i.hizliresim.com/g15mqud.png" />
+
+        <!----FOCUS----->
+        <div tabindex="1" class="focus-bar bell-bar">nothing</div>
+        <!-------------------->
+        <div tabindex="1" class="focus-bar message-bar">you are alone</div>
+        <div tabindex="1" class="focus-bar btn-bar">hello</div>
+      </div>
+    </div>
+    <div id="writepost">
+      
+      <h2>create pin</h2>
+    </div>
+  <div id="posts">
+    <form id="forms" action="/uploadpost" method="post" enctype="multipart/form-data">
+        <div id="create">
+            <div id="image">
+                <svg id="svg" class="gUZ OfC U9O kVc" height="32" width="32" viewBox="0 0 24 24" aria-label="Add files" role="img"><path d="M24 12c0-6.627-5.372-12-12-12C5.373 0 0 5.373 0 12s5.373 12 12 12c6.628 0 12-5.373 12-12zm-10.767 3.75a1.25 1.25 0 0 1-2.5 0v-3.948l-1.031 1.031a1.25 1.25 0 0 1-1.768-1.768L12 7l4.066 4.065a1.25 1.25 0 0 1-1.768 1.768l-1.065-1.065v3.982z"></path></svg>
+                <h3>Choose a file</h3>
+            </div>
+            <input id="inputfile" hidden type="file" name="postimage" >
+        </div>
+       <div id="dets">
+        <div id="in1">
+            <h3>title</h3>
+            <input type="text" placeholder="Add a title" name="title">
+         </div>
+         <div id="in2">
+            <h3>discription</h3>
+            <input id="des" type="text" placeholder="Add a detailed description" name="description">
+         </div>
+         <div id="in3">
+            <input type="submit" value="create">
+         </div>
+           
+       </div>
+    </form>
+  </div>
+
+    <script>
+
+  function postform(){
+    document.querySelector("#svg").addEventListener("click",function(){
+       
+          document.querySelector("#inputfile").click();
+      })
+  }
+  postform();
+    function forem(){
+        document.querySelector("#pen").addEventListener("click",function(){
+           document.querySelector("#inputtext").click();
+        })
+    document.querySelector("#inputtext").addEventListener("change",function(){
+         document.querySelector("#forem").submit();
+    })
+    }
+    orem();
+     
+
+      document.getElementById("two").onclick = function () {
+        document.getElementById("two").style.pointerEvents = "none";
+        document.getElementById("two").style.opacity = "0.5";
+        document.querySelector(".responsive-search-bar").style.top = "0px";
+      };
+      document.querySelector(".close").onclick = function () {
+        document.getElementById("two").style.pointerEvents = "auto";
+        document.getElementById("two").style.opacity = "1";
+        document.querySelector(".responsive-search-bar").style.top = "-300px";
+      };
+    
+    </script>
+  </body>
+</html>
